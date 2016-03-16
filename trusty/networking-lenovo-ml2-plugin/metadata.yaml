@@ -1,0 +1,15 @@
+name: networking-lenovo-ml2-plugin
+summary: lenovo ML2 plugin charm
+maintainer: lenovo-networking <lenovo-networking@lenovo.com>
+description: |
+  A simple charm to deploy Lenovo ML2 plugin vendor driver.
+tags:
+  # Replace "misc" with one or more whitelisted tags from this list:
+  # https://jujucharms.com/docs/stable/authors-charm-metadata
+  - openstack
+provides:
+  lenovo-ml2-plugin:
+    interface: lenovo-ml2-plugin
+requires:
+  neutron-api:
+    interface: neutron-api

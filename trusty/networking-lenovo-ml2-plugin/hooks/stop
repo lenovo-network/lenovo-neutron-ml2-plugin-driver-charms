@@ -1,0 +1,7 @@
+#!/bin/bash
+status-set maintenance "Fetching and installing dependency"
+pip uninstall -y networking-lenovo
+pip uninstall -y pysnmp
+pip uninstall -y ncclient
+sed '/^ *mechanism_drivers *= */s/lenovo,//g' -i /etc/neutron/plugins/ml2/ml2_conf.ini
+service neutron-server restart

@@ -1,0 +1,29 @@
+#!/bin/bash
+set -e # If any command fails, stop execution of the hook with that error
+status-set maintenance "Fetching and installing dependency"
+juju-log "Fetching and installing dependency"
+#python-dev is needed to properly install pysnmp
+apt-get install -y python-pip git python-dev
+pip install ncclient==0.4.2
+pip install pysnmp
+status-set maintenance "Dependency install done, installing lenovo ML2 plugin"
+juju-log "Dependency install done, installing lenovo ML2 plugin"
+if [ -d "/tmp/networking-lenovo" ]; then
+    rm -rf /tmp/networking-lenovo;
+fi
+git clone https://github.com/lenovo-network/networking-lenovo.git /tmp/networking-lenovo
+cd /tmp/networking-lenovo
+python setup.py install
+
+#add lenovo mech driver
+sed 's/^ *mechanism_drivers *= */&lenovo,/g' -i /etc/neutron/plugins/ml2/ml2_conf.ini
+
+neutron-db-manage --config-file /etc/neutron/neutron.conf --config-file /etc/neutron/plugins/ml2/ml2_conf.ini upgrade head
+
+status-set active "Restarting neutron service."
+juju-log "Restarting neutron service."
+
+service neutron-server restart
+
+status-set active "lenovo ml2 plugin fully up and running"
+juju-log "lenovo ml2 plugin fully up and running"
