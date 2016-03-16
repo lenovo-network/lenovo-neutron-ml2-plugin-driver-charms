@@ -1,1 +1,19 @@
-this is a simple charm to deploy Neutron ML2 plugin vendor driver for Lenovo networking products.
+Overview
+--------
+
+This charm is to deploy Neutron ML2 plugin vendor driver for Lenovo networking products. 
+It is intended to be used alongside the other OpenStack components.
+
+Usage
+-----
+
+In order to deploy Lenovo plugin driver, neutron-api service is required.
+Please refer to https://jujucharms.com/openstack-base/ for detail of OpenStack base bundle requirements and installation.
+After OpenStack base successfully deployed, download this charm to your juju enviroment host.
+	git clone https://github.com/lenovo-network/lenovo-neutron-ml2-plugin-driver-charms.git ~/charms
+Deploy plugin driver charm by:
+	juju deploy --repository=~/charms local:trusty/lenovo-ml2-plugin --to ${the-machine-where-neutron-api-deployed} 
+
+What next?
+----------
+Login to the machine where neutron-api and lenovo-ml2-plugin deployed, and edit /etc/neutron/plugin/ml2/ml2_conf.ini. Update the [ml2_mech_lenovo] section to match the physical deployment. Please refer to https://wiki.openstack.org/wiki/Neutron/ML2/LenovoML2Mechanism "section 2. Lenovo Plug-in Configuration" for detail syntax. A script is also provided to generate this part of configuration as well, please find it here: https://github.com/lenovo-network/networking-lenovo/tree/master/etc
