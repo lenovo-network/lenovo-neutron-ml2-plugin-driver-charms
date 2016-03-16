@@ -16,4 +16,13 @@ Deploy plugin driver charm by:
 
 What next?
 ----------
-Login to the machine where neutron-api and lenovo-ml2-plugin deployed, and edit /etc/neutron/plugin/ml2/ml2_conf.ini. Update the [ml2_mech_lenovo] section to match the physical deployment. Please refer to https://wiki.openstack.org/wiki/Neutron/ML2/LenovoML2Mechanism "section 2. Lenovo Plug-in Configuration" for detail syntax. A script is also provided to generate this part of configuration as well, please find it here: https://github.com/lenovo-network/networking-lenovo/tree/master/etc
+Login to the machine where neutron-api and lenovo-ml2-plugin deployed, and edit /etc/neutron/plugin/ml2/ml2_conf.ini. 
+Update the [ml2_mech_lenovo] section to match the physical deployment. 
+Please refer to 
+	https://wiki.openstack.org/wiki/Neutron/ML2/LenovoML2Mechanism 
+"section 2. Lenovo Plug-in Configuration" for detail syntax. 
+A script is also provided to generate this part of configuration as well, please find it here: 
+	https://github.com/lenovo-network/networking-lenovo/tree/master/etc
+Reload neutron server after edit ml2_conf.ini by:
+	service neutron-server reload
+	
