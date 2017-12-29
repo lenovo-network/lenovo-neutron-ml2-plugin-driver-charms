@@ -3,7 +3,8 @@ set -e # If any command fails, stop execution of the hook with that error
 status-set maintenance "Fetching and installing dependency"
 juju-log "Fetching and installing dependency"
 #python-dev is needed to properly install pysnmp
-apt-get install -y python-pip git python-dev
+apt-get install -y python-pip git python-dev libpq-dev libxml2-dev libxslt1-dev libldap2-dev libsasl2-dev libffi-dev
+python -m easy_install --upgrade pyOpenSSL
 pip install ncclient==0.4.2
 pip install pysnmp
 status-set maintenance "Dependency install done, installing lenovo ML2 plugin"
@@ -11,7 +12,7 @@ juju-log "Dependency install done, installing lenovo ML2 plugin"
 if [ -d "/tmp/networking-lenovo" ]; then
     rm -rf /tmp/networking-lenovo;
 fi
-git clone https://github.com/lenovo-network/networking-lenovo.git /tmp/networking-lenovo
+git clone https://github.com/lenovo-network/networking-lenovo.git -b newton-ocata /tmp/networking-lenovo
 cd /tmp/networking-lenovo
 python setup.py install
 
