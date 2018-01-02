@@ -11,7 +11,7 @@ In order to deploy Lenovo plugin driver, neutron-api service is required.
 Please refer to https://jujucharms.com/openstack-base/ for detail of OpenStack base bundle requirements and installation.
 After OpenStack base successfully deployed, download this charm to your juju enviroment host.
 	git clone https://github.com/lenovo-network/lenovo-neutron-ml2-plugin-driver-charms.git
-	cd lenovo-neutron-ml2-plugin-driver-charms/trusty
+	cd lenovo-neutron-ml2-plugin-driver-charms/xenial
 Deploy plugin driver charm by:
 	juju deploy ./networking-lenovo-ml2-plugin --to ${the-machine-where-neutron-api-deployed}
 
