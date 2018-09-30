@@ -12,7 +12,7 @@ juju-log "Dependency install done, installing lenovo ML2 plugin"
 if [ -d "/tmp/networking-lenovo" ]; then
     rm -rf /tmp/networking-lenovo;
 fi
-git clone https://github.com/lenovo-network/networking-lenovo.git -b newton-ocata /tmp/networking-lenovo
+git clone https://github.com/lenovo-network/networking-lenovo.git -b vxlan /tmp/networking-lenovo
 cd /tmp/networking-lenovo
 python setup.py install
 
