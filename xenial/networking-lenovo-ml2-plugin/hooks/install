@@ -14,7 +14,7 @@ if [ -d "/tmp/networking-lenovo" ]; then
 fi
 git clone https://github.com/lenovo-network/networking-lenovo.git -b vxlan /tmp/networking-lenovo
 cd /tmp/networking-lenovo
-python setup.py install
+python setup.py install --install-purelib=/usr/lib/python2.7/dist-packages
 
 #add lenovo mech driver
 sed 's/^ *mechanism_drivers *= */&lenovo,/g' -i /etc/neutron/plugins/ml2/ml2_conf.ini
